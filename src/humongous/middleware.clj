@@ -1,6 +1,12 @@
 (ns humongous.middleware
-  (:use [humongous.request :only [url-decode param-map]]
-        [humongous.response :only [success]]))
+  (:use [humongous.request :only [url-decode]]
+        [humongous.response :only [success]])
+  (:import [java.net URLDecoder]))
+
+(defn- url-decode
+  "Returns the form-url-decoded version of the given string."
+  [encoded]
+  (URLDecoder/decode encoded "UTF-8"))
 
 (defn wrap-classpath-public [app dir]
   (fn [req]
@@ -14,11 +20,3 @@
             (success (.openStream file))
             (app req))))
       (app req))))
-
-(defn wrap-form-params [app]
-  (fn [req]
-    (if-not (#{:get :head} (:request-method req))
-      (if-not (contains? (:headers req) "application/x-www-form-urlencoded")
-        (let [new-req (merge req {:form-params (param-map req)})]
-          (app new-req))))
-    (app req)))
