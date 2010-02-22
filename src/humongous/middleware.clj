@@ -1,6 +1,7 @@
 (ns humongous.middleware
-  (:use [humongous.request :only [url-decode]]
-        [humongous.response :only [success]])
+  (:use [humongous.mongo :only [*mongo*]]
+        [humongous.response :only [success]]
+        [karras :only [connect]])
   (:import [java.net URLDecoder]))
 
 (defn- url-decode
@@ -19,4 +20,9 @@
           (if-let [file (ClassLoader/getSystemResource (str dir "/" path))]
             (success (.openStream file))
             (app req))))
+      (app req))))
+
+(defn wrap-connection [app]
+  (fn [req]
+    (binding [*mongo* (connect)]
       (app req))))
