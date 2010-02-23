@@ -10,6 +10,7 @@
    [:html 
     [:head
      (include-js "/js/jquery-1.4.2.min.js"
+                 "/js/jquery-ui-1.7.2.custom.min.js"
                  "/js/application.js")
      (include-css "/css/screen.css"
                   "/css/ie.css"
@@ -50,8 +51,13 @@
               [:a.drop-db {:href (str "/" db "/drop")} "Drop DB"]]
              [:div.new-collection-form.hidden
               [:form {:method "POST" :action (str "/" db "/collection/new")}
-               [:input {:type "text" :name "collection-name" :value ""}]
-               [:input {:type "submit" :value "Create"}]]]
+               [:p [:label {:for "collection-name"} "Name: "]
+                [:input {:type "text" :id "collection-name" :name "collection-name" :value ""}]]
+               [:div.fields
+                [:p [:button {:class ""} "Add Field"]]
+                [:p [:input {:type "text" :name "fields[]" :value ""}]]]
+               [:p
+                 [:input {:type "submit" :value "Create"}]]]]
              [:h3 "Collections"]
              (map #(collection-partial db %)
                   (list-collections db))])))

@@ -33,4 +33,14 @@ $(document).ready(function() {
     }
   });
 
+  $(".fields button").bind("click", function() {
+    var $el = $(this).parent().next("p").clone();
+    var split_id = $el.find("input").attr("id").split("-");
+    var field_num = parseInt(split_id[1]) + 1;
+    var new_id = split_id[0] + "-" + field_num.toString();
+
+    $el.attr("id", new_id);
+    $("div.fields").append($el);
+    return false;
+  })
 })
