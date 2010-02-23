@@ -1,11 +1,25 @@
-# Humongous
+Humongous
+=========
 
-A web interface to mongoDB written in clojure.
+A web interface to mongoDB written in Clojure.
 
 Knowing that mongoDB was named from the word "humongous" I saw it only fitting to name this project after that also.
 
-## MIT License
+Requirements
+------------
 
+- [leiningen](http://github.com/technomancy/leiningen)
+- [mongoDB](http://www.mongodb.org)
+
+Usage
+-----
+
+    $ lein clean && lein uberjar
+    
+    $ java -jar humongous-standalone.jar [port]
+
+MIT License
+-----------
 Copyright (c) 2010 Seth Buntin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

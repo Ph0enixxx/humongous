@@ -14,19 +14,20 @@
                  "/js/application.js")
      (include-css "/css/screen.css"
                   "/css/ie.css"
+                  "/css/blitzer/jquery-ui-1.7.2.custom.css"
                   "/css/application.css")
      [:title "Humongous"]]
     [:body
      [:div.container
-      [:h1 "Humongous"]
+      [:h1 [:a {:href "/"} "Humongous"]]
       content]]]))
 
 (defn index [req]
   (let [dbs (.getDatabaseNames *mongo*)]
     (layout [:div#main
-             [:h2 "Databases"]
+             [:h2#databases "Databases"]
              (map (fn [db] [:div.db
-                            [:p [:a {:href (str "/" db)} db]]])
+                            [:h3 [:a {:href (str "/" db)} db]]])
                   dbs)])))
 
 (defn index-partial [db col-name]
@@ -45,7 +46,7 @@
   (let [db (mongo-db *mongo* (:db (:params req)))]
     (layout [:div#main
              [:h2 (str db)]
-             [:div#db-nav
+             [:div#db-nav.navigation
               [:a.new-collection {:href ""} "New Collection"]
               " | "
               [:a.drop-db {:href (str "/" db "/drop")} "Drop DB"]]
@@ -54,7 +55,8 @@
                [:p [:label {:for "collection-name"} "Name: "]
                 [:input {:type "text" :id "collection-name" :name "collection-name" :value ""}]]
                [:div.fields
-                [:p [:button {:class ""} "Add Field"]]
+                [:p
+                 [:button {:class "fg-button ui-state-default fg-button-icon-left ui-corner-all ui-state-hover"} [:span {:class "ui-icon ui-icon-plusthick"}] "Add Field"]]
                 [:p [:input {:type "text" :name "fields[]" :value ""}]]]
                [:p
                  [:input {:type "submit" :value "Create"}]]]]
@@ -67,7 +69,7 @@
         col (collection db (:col (:params req)))]
     (layout [:div#main
              [:h2 (.getFullName col)]
-             [:div.collection-nav
+             [:div#collection-nav.navigation
               [:a.new-index {:href ""} "New Index"]
               " | "
               [:a.drop-indexes {:href (str "/" db "/" col "/indexes/drop")} "Drop Indexes"]
@@ -75,8 +77,10 @@
               [:a.drop-collection {:href (str "/" db "/" col "/drop")} "Drop Collection"]]
              [:div.new-index-form.hidden
               [:form {:method "POST" :action (str "/" db "/" col "/indexes/new")}
-               [:input {:type "text" :name "index-name" :value ""}]
-               [:input {:type "submit" :value "Create"}]]]
+               [:p
+                [:label {:for "index-name"} "Name: "]
+                [:input {:type "text" :id "index-name" :name "index-name" :value ""}]]
+               [:p [:input {:type "submit" :value "Create"}]]]]
              [:div.collection-summary
               [:h3 "Summary"]
               [:p#count (str "Current number of documents: " (.getCount col))]
