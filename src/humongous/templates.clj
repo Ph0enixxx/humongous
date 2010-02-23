@@ -11,7 +11,8 @@
     [:head
      (include-js "/js/jquery-1.4.2.min.js"
                  "/js/jquery-ui-1.7.2.custom.min.js"
-                 "/js/application.js")
+                 "/js/application.js"
+                 "/js/jquery.ufvalidator-1.0.4.js")
      (include-css "/css/screen.css"
                   "/css/ie.css"
                   "/css/blitzer/jquery-ui-1.7.2.custom.css"
@@ -53,11 +54,11 @@
              [:div.new-collection-form.hidden
               [:form {:method "POST" :action (str "/" db "/collection/new")}
                [:p [:label {:for "collection-name"} "Name: "]
-                [:input {:type "text" :id "collection-name" :name "collection-name" :value ""}]]
+                [:input {:type "text" :class "req-string" :id "collection-name" :name "collection-name" :value ""}]]
                [:div.fields
                 [:p
                  [:button {:class "fg-button ui-state-default fg-button-icon-left ui-corner-all ui-state-hover"} [:span {:class "ui-icon ui-icon-plusthick"}] "Add Field"]]
-                [:p [:input {:type "text" :name "fields[]" :value ""}]]]
+                [:p [:input {:class "req-string" :type "text" :name "fields[]" :value ""}]]]
                [:p
                  [:input {:type "submit" :value "Create"}]]]]
              [:h3 "Collections"]
@@ -79,7 +80,7 @@
               [:form {:method "POST" :action (str "/" db "/" col "/indexes/new")}
                [:p
                 [:label {:for "index-name"} "Name: "]
-                [:input {:type "text" :id "index-name" :name "index-name" :value ""}]]
+                [:input {:type "text" :class "req-string" :id "index-name" :name "index-name" :value ""}]]
                [:p [:input {:type "submit" :value "Create"}]]]]
              [:div.collection-summary
               [:h3 "Summary"]

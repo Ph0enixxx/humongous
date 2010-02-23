@@ -11,7 +11,11 @@ $(document).ready(function() {
 
   $(".drop-collection").bind("click", function() {
     if (confirm("Are you sure you want to drop this collection?")) {
-      return true;
+      if(confirm("This will delete all data in this collection.  Are you really sure?")) {
+        return true;
+      } else {
+        return false
+      }
     } else {
       return false;
     }
@@ -19,7 +23,11 @@ $(document).ready(function() {
 
   $(".drop-db").bind("click", function() {
     if (confirm("Are you sure you want to drop this database?")) {
-      return true;
+      if(confirm("This will delete all data in this database.  Are you really sure?")) {
+        return true;
+      } else {
+        return false
+      }
     } else {
       return false;
     }
@@ -40,7 +48,18 @@ $(document).ready(function() {
     var new_id = split_id[0] + "-" + field_num.toString();
 
     $el.attr("id", new_id);
+    $el.find("input").attr("value", "");
     $("div.fields").append($el);
     return false;
+  })
+
+  $(".new-collection-form form input[type=submit]").formValidator({
+    scope: "form",
+    errorClass: "ui-state-error"
+  })
+
+  $(".new-index-form form input[type=submit]").formValidator({
+    scope: "form",
+    errorClass: "ui-state-error"
   })
 })
