@@ -17,7 +17,7 @@
                     (.endsWith "/" uri)        (str uri "index.html")
                     (re-find #"\.[a-z]+$" uri) uri
                     :else                      (str uri ".html"))]
-          (if-let [file (ClassLoader/getSystemResource (str dir "/" path))]
+          (if-let [file (ClassLoader/getSystemResource (str dir path))]
             (success (.openStream file))
             (app req))))
       (app req))))
