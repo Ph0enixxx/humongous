@@ -82,7 +82,7 @@
                 [:label {:for "index-name"} "Name: "]
                 [:input {:type "text" :class "req-string" :id "index-name" :name "index-name" :value ""}]]
                [:p [:input {:type "submit" :value "Create"}]]]]
-             [:div.collection-summary
+             [:div.collection-summary.ui-state-highlight
               [:h3 "Summary"]
               [:p#count (str "Current number of documents: " (.getCount col))]
               [:div#sample
