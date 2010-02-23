@@ -14,7 +14,6 @@
                  "/js/application.js"
                  "/js/jquery.ufvalidator-1.0.4.js")
      (include-css "/css/screen.css"
-                  "/css/ie.css"
                   "/css/blitzer/jquery-ui-1.7.2.custom.css"
                   "/css/application.css")
      [:title "Humongous"]]
@@ -58,7 +57,8 @@
                [:div.fields
                 [:p
                  [:button {:class "fg-button ui-state-default fg-button-icon-left ui-corner-all ui-state-hover"} [:span {:class "ui-icon ui-icon-plusthick"}] "Add Field"]]
-                [:p [:input {:class "req-string" :type "text" :name "fields[]" :value ""}]]]
+                [:p
+                 [:input {:class "req-string" :type "text" :name "fields[]" :value ""}]]]
                [:p
                  [:input {:type "submit" :value "Create"}]]]]
              [:h3 "Collections"]
