@@ -1,5 +1,5 @@
 (ns humongous.templates
-  (:use [hiccup.core :only [html]]
+  (:use [hiccup :only [html]]
         [hiccup.form-helpers :only [select-options]]
         [hiccup.page-helpers :only [include-js include-css unordered-list]]
         [humongous.mongo :only [*mongo*]]
