@@ -16,8 +16,8 @@
   (POST "/:db/:col/indexes/new" req (create-index req))
   (GET "/:db/:col/indexes/drop" req (drop-indexes req)))
 
-(defn app []
-  (wrap-classpath-public
-   (wrap-connection
-    (wrap-params routes))
-   "public"))
+(def app
+     (-> routes
+         wrap-params
+         wrap-connection
+         (wrap-classpath-public "public")))

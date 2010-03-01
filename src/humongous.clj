@@ -5,5 +5,5 @@
 
 (defn -main [& args]
   (let [[port db-name] args]
-    (run-jetty (app)
+    (run-jetty app
                {:port (Integer. (or port 8080))})))
