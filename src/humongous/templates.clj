@@ -67,7 +67,8 @@
 
 (defn db-collection [req]
   (let [db (mongo-db *mongo* (:db (:params req)))
-        col (collection db (:col (:params req)))]
+        col (collection db (:col (:params req)))
+        one-item (.findOne col)]
     (layout [:div#main
              [:h2 (.getFullName col)]
              [:div#collection-nav.navigation
@@ -83,9 +84,24 @@
                 [:input {:type "text" :class "req-string" :id "index-name" :name "index-name" :value ""}]]
                [:p [:input {:type "submit" :value "Create"}]]]]
              [:div.collection-summary.ui-state-highlight
-              [:h3 "Summary"]
-              [:p#count (str "Current number of documents: " (.getCount col))]
-              [:div#sample
-               [:p "Sample:"]
-               [:p#one (.findOne col)]]]
+              [:h3.clickable-header "Summary"]
+              [:div#summary-content.hidden
+               [:p#count (str "Current number of documents: " (.getCount col))]
+               [:div#sample
+                [:p "Sample:"]
+                [:p#one.last one-item]]]]
+             [:div#collection-query-form
+              [:form {:action "" :method ""}
+               [:h4 "Query"]
+               [:p [:button#add-field.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only [:span.ui-button-text "Add Field"]]]
+               [:p [:select#db-field {:name "db-field"}
+                 (select-options (remove #(= "_ns" %) (keys one-item)))]
+                [:select#db-predicate {:name "db-field"}
+                 (select-options ["gt" "gte" "lt" "lte" "eq" "ne" "in" "nin" "mod" "all" "exists"])]
+                [:input#predicate-val {:name "predicate-val"}]]
+               [:div#query-items]
+               [:p [:input#submit-query.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only {:type "submit" :value "Submit"}]]]]
              (index-partial db col)])))
+
+(defn db-collection-query [req]
+  (prn req))

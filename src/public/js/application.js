@@ -62,4 +62,12 @@ $(document).ready(function() {
     scope: "form",
     errorClass: "ui-state-error"
   })
+
+  $(".clickable-header").click(function() {
+    $(this).next("div").toggle();
+  })
+
+  $(".ui-button").hover(function() {
+    $(this).toggleClass("ui-state-hover");
+  })
 })
