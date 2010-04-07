@@ -1,3 +1,15 @@
+function double_confirm(frst_conf, sec_conf){
+  if (confirm(frst_conf)) {
+    if(confirm(sec_conf)) {
+      return true;
+    } else {
+      return false
+    }
+  } else {
+    return false;
+  }
+}
+
 $(document).ready(function() {
   $(".new-collection").bind("click", function() {
     $(".new-collection-form").toggle();
@@ -10,35 +22,17 @@ $(document).ready(function() {
   });
 
   $(".drop-collection").bind("click", function() {
-    if (confirm("Are you sure you want to drop this collection?")) {
-      if(confirm("This will delete all data in this collection.  Are you really sure?")) {
-        return true;
-      } else {
-        return false
-      }
-    } else {
-      return false;
-    }
+    return double_confirm("Are you sure you want to drop this collection?",
+                          "This will delete all data in this collection.  Are you really sure?")
   });
 
   $(".drop-db").bind("click", function() {
-    if (confirm("Are you sure you want to drop this database?")) {
-      if(confirm("This will delete all data in this database.  Are you really sure?")) {
-        return true;
-      } else {
-        return false
-      }
-    } else {
-      return false;
-    }
+    return double_confirm("Are you sure you want to drop this database?",
+                          "This will delete all data in this database.  Are you really sure?")
   });
   
   $(".drop-indexes").bind("click", function() {
-    if (confirm("Are you sure you want to drop these indexes?")) {
-      return true;
-    } else {
-      return false;
-    }
+    return confirm("Are you sure you want to drop these indexes?")
   });
 
   $(".fields button").bind("click", function() {
