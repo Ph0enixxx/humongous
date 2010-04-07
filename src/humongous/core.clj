@@ -1,5 +1,5 @@
 (ns humongous.core
-  (:use [compojure :only [defroutes POST GET PUT DELETE ANY]]
+  (:use [compojure.core :only [defroutes POST GET PUT DELETE ANY]]
         [humongous.middleware :only [wrap-classpath-public wrap-connection]]
         [humongous.response :only [success]]
         [humongous.templates :only [index db db-collection db-collection-query]]
