@@ -91,14 +91,15 @@
                 [:p "Sample:"]
                 [:p#one.last one-item]]]]
              [:div#collection-query-form
-              [:form {:action "" :method ""}
+              [:form {:action "" :method "post"}
                [:h4 "Query"]
                [:p [:button#add-field.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only [:span.ui-button-text "Add Field"]]]
-               [:p [:select#db-field {:name "db-field"}
-                 (select-options (remove #(= "_ns" %) (keys one-item)))]
-                [:select#db-predicate {:name "db-field"}
-                 (select-options ["gt" "gte" "lt" "lte" "eq" "ne" "in" "nin" "mod" "all" "exists"])]
-                [:input#predicate-val {:name "predicate-val"}]]
+               [:div#fields
+                [:p.def-field [:select#db-field {:name "db-field"}
+                               (select-options (remove #(= "_ns" %) (keys one-item)))]
+                 [:select#db-predicate {:name "db-field"}
+                  (select-options ["gt" "gte" "lt" "lte" "eq" "ne" "in" "nin" "mod" "all" "exists"])]
+                 [:input#predicate-val {:name "predicate-val"}]]]
                [:div#query-items]
                [:p [:input#submit-query.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only {:type "submit" :value "Submit"}]]]]
              (index-partial db col)])))

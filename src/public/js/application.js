@@ -64,4 +64,17 @@ $(document).ready(function() {
   $(".ui-button").hover(function() {
     $(this).toggleClass("ui-state-hover");
   })
+
+  $("#add-field").click(function() {
+    var rem_button = "<button class=\"remove-field ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only\"><span class=\"ui-button-text\">Remove</span></button>"
+    var field = $(".def-field").clone();
+    field.removeClass("def-field").addClass("field");
+    field.append(rem_button);
+    $("#fields").append(field);
+    return false;
+  })
+
+  $(".remove-field").live("click", function() {
+    $(this).parent().remove();
+  })
 })
